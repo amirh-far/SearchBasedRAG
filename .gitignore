@@ -172,3 +172,4 @@ cython_debug/
 
 
 SearchBasedRAG.code-workspace
+node_modules
