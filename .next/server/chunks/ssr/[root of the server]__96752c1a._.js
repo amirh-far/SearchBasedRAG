@@ -739,7 +739,7 @@ async function closeRedisConnection() {
 
 var { g: global, d: __dirname } = __turbopack_context__;
 {
-/* __next_internal_action_entry_do_not_use__ {"40344289821be6c9335218c616366ce7a0c488768d":"getChats","40487b6f8e573166740a84065df99f8e43c66be904":"getSharedChat","408cfa080ddd2f80bf9c401179ee5e26eef9199ba7":"clearChats","60b544e96a88a59b8650a510d98f51defe64dc13ae":"getChat","60c8788521e5fb94dba16677c80098ea0c2a50789f":"saveChat","60f1b979c59602596a490407f8f7af6cdf66c2635c":"shareChat"} */ __turbopack_context__.s({
+/* __next_internal_action_entry_do_not_use__ {"407436dbee0eac9c07425c0e5c664090d819e110b0":"getChats","407ca78c913fc4e9a4f5581ca810f4a422a4182689":"getSharedChat","40aa79a925157ba7e49c6f04f8f726a56bb40cbe98":"clearChats","60312532a1c56a65646f003f72b560b30dfd0d9f82":"shareChat","603666b7d10ff9c12a65a76705854c0cda11397f77":"getChat","60b67376a13fda0f582e9a1ab02e67e578d29cf1da":"saveChat"} */ __turbopack_context__.s({
     "clearChats": (()=>clearChats),
     "getChat": (()=>getChat),
     "getChats": (()=>getChats),
@@ -891,12 +891,12 @@ async function /*#__TURBOPACK_DISABLE_EXPORT_MERGING__*/ shareChat(id, userId = 
     getSharedChat,
     shareChat
 ]);
-(0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$build$2f$webpack$2f$loaders$2f$next$2d$flight$2d$loader$2f$server$2d$reference$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["registerServerReference"])(getChats, "40344289821be6c9335218c616366ce7a0c488768d", null);
-(0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$build$2f$webpack$2f$loaders$2f$next$2d$flight$2d$loader$2f$server$2d$reference$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["registerServerReference"])(getChat, "60b544e96a88a59b8650a510d98f51defe64dc13ae", null);
-(0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$build$2f$webpack$2f$loaders$2f$next$2d$flight$2d$loader$2f$server$2d$reference$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["registerServerReference"])(clearChats, "408cfa080ddd2f80bf9c401179ee5e26eef9199ba7", null);
-(0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$build$2f$webpack$2f$loaders$2f$next$2d$flight$2d$loader$2f$server$2d$reference$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["registerServerReference"])(saveChat, "60c8788521e5fb94dba16677c80098ea0c2a50789f", null);
-(0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$build$2f$webpack$2f$loaders$2f$next$2d$flight$2d$loader$2f$server$2d$reference$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["registerServerReference"])(getSharedChat, "40487b6f8e573166740a84065df99f8e43c66be904", null);
-(0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$build$2f$webpack$2f$loaders$2f$next$2d$flight$2d$loader$2f$server$2d$reference$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["registerServerReference"])(shareChat, "60f1b979c59602596a490407f8f7af6cdf66c2635c", null);
+(0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$build$2f$webpack$2f$loaders$2f$next$2d$flight$2d$loader$2f$server$2d$reference$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["registerServerReference"])(getChats, "407436dbee0eac9c07425c0e5c664090d819e110b0", null);
+(0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$build$2f$webpack$2f$loaders$2f$next$2d$flight$2d$loader$2f$server$2d$reference$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["registerServerReference"])(getChat, "603666b7d10ff9c12a65a76705854c0cda11397f77", null);
+(0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$build$2f$webpack$2f$loaders$2f$next$2d$flight$2d$loader$2f$server$2d$reference$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["registerServerReference"])(clearChats, "40aa79a925157ba7e49c6f04f8f726a56bb40cbe98", null);
+(0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$build$2f$webpack$2f$loaders$2f$next$2d$flight$2d$loader$2f$server$2d$reference$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["registerServerReference"])(saveChat, "60b67376a13fda0f582e9a1ab02e67e578d29cf1da", null);
+(0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$build$2f$webpack$2f$loaders$2f$next$2d$flight$2d$loader$2f$server$2d$reference$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["registerServerReference"])(getSharedChat, "407ca78c913fc4e9a4f5581ca810f4a422a4182689", null);
+(0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$build$2f$webpack$2f$loaders$2f$next$2d$flight$2d$loader$2f$server$2d$reference$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["registerServerReference"])(shareChat, "60312532a1c56a65646f003f72b560b30dfd0d9f82", null);
 }}),
 "[project]/components/clear-history.tsx (client reference/proxy) <module evaluation>": ((__turbopack_context__) => {
 "use strict";

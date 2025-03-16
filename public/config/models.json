@@ -127,13 +127,13 @@
       "toolCallModel": "phi4"
     },
     {
-      "id": "<OLLAMA_MODEL_ID>",
-      "name": "<OLLAMA_MODEL_NAME>",
+      "id": "llama3.3:70b",
+      "name": "llama3.3:70b",
       "provider": "Ollama",
       "providerId": "ollama",
       "enabled": true,
       "toolCallType": "manual",
-      "toolCallModel": "<OLLAMA_MODEL_ID>"
+      "toolCallModel": "llama3.3:70b"
     },
     {
       "id": "grok-2-1212",
