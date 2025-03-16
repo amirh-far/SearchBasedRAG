@@ -8,7 +8,7 @@
         }
       },
       "layer": {
-        "app/_not-found/page": "rsc"
+        "app/_not-found/page": "action-browser"
       }
     },
     "40aa79a925157ba7e49c6f04f8f726a56bb40cbe98": {
@@ -19,7 +19,7 @@
         }
       },
       "layer": {
-        "app/_not-found/page": "rsc"
+        "app/_not-found/page": "action-browser"
       }
     },
     "60312532a1c56a65646f003f72b560b30dfd0d9f82": {
@@ -30,7 +30,7 @@
         }
       },
       "layer": {
-        "app/_not-found/page": "rsc"
+        "app/_not-found/page": "action-browser"
       }
     },
     "60b67376a13fda0f582e9a1ab02e67e578d29cf1da": {
@@ -41,7 +41,7 @@
         }
       },
       "layer": {
-        "app/_not-found/page": "rsc"
+        "app/_not-found/page": "action-browser"
       }
     },
     "407ca78c913fc4e9a4f5581ca810f4a422a4182689": {
@@ -52,7 +52,7 @@
         }
       },
       "layer": {
-        "app/_not-found/page": "rsc"
+        "app/_not-found/page": "action-browser"
       }
     },
     "407436dbee0eac9c07425c0e5c664090d819e110b0": {
@@ -63,7 +63,7 @@
         }
       },
       "layer": {
-        "app/_not-found/page": "rsc"
+        "app/_not-found/page": "action-browser"
       }
     }
   },

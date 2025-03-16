@@ -1,4 +1,6 @@
 {
   "/page": "app/page.js",
-  "/api/chat/route": "app/api/chat/route.js"
+  "/api/chat/route": "app/api/chat/route.js",
+  "/_not-found/page": "app/_not-found/page.js",
+  "/favicon.ico/route": "app/favicon.ico/route.js"
 }
