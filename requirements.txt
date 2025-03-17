@@ -3,3 +3,9 @@ numpy
 openai
 jupyter
 ipykernel
+FlagEmbedding
+langchain
+langchain-community
+unstructured
+Markdown
+tqdm
