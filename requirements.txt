@@ -10,3 +10,4 @@ unstructured
 Markdown
 tqdm
 faiss-gpu
+ollama
