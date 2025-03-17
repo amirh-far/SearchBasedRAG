@@ -9,3 +9,4 @@ langchain-community
 unstructured
 Markdown
 tqdm
+faiss-gpu
