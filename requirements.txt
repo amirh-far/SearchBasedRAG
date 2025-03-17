@@ -11,3 +11,6 @@ Markdown
 tqdm
 faiss-gpu
 ollama
+fastapi
+uvicorn
+marko
