@@ -1,0 +1,10 @@
+# mkdocs documentation
+/site
+
+# python
+.venv
+*.pyc
+
+# editor
+.vscode
+.idea

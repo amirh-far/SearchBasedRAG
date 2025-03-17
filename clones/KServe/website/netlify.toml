@@ -1,0 +1,3 @@
+[build]
+publish = "/"
+command = "sh build.sh"
