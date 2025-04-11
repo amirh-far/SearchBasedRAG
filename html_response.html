@@ -1,6 +1,6 @@
-<p>To integrate KServe with LLaMA 4.1, you'll need to follow these steps:</p>
+<p>To use KServe for LLaMA 4.1, you will need to follow these steps:</p>
 <ol>
-<li><strong>Deploy a KServe LLM Inference Service</strong>: Use the example provided in the documentation to deploy a KServe LLM Inference Service for LLaMA 3. You can modify the <code>model_name</code> and <code>model_id</code> to use LLaMA 4.1 instead.</li>
+<li><strong>Deploy a KServe LLM Inference Service</strong>: First, deploy a KServe LLM Inference Service using the <code>llama4</code> model. You can do this by creating a YAML file with the following configuration:</li>
 </ol>
 <pre><code class="language-yaml">apiVersion: serving.kserve.io/v1beta1
 kind: InferenceService
@@ -22,6 +22,7 @@ spec:
               name: hf-secret
               key: HF_TOKEN
 </code></pre>
+<p>Apply this configuration using <code>kubectl apply -f &lt;filename&gt;.yaml</code>.</p>
 <ol start="2">
 <li><strong>Get the SERVICE_HOSTNAME</strong>: Run the following command to get the <code>SERVICE_HOSTNAME</code>:</li>
 </ol>
@@ -33,20 +34,51 @@ spec:
 <pre><code class="language-bash">pip3 install openai
 </code></pre>
 <ol start="4">
-<li><strong>Create a Python script to interact with the KServe LLM Inference Service</strong>: Create a Python script (e.g., <code>sample_openai.py</code>) to interact with the KServe LLM Inference Service using the OpenAI SDK.</li>
+<li><strong>Create a Python script to interact with the KServe LLM Inference Service</strong>: Create a Python script (e.g., <code>sample_openai.py</code>) to interact with the KServe LLM Inference Service:</li>
 </ol>
-<pre><code class="language-python">from openai import OpenAI
+<pre><code class="language-python">import os
+import json
+from openai import OpenAI
 
-Deployment_url = f&quot;http://{SERVICE_HOSTNAME}&quot;
-# Initialize the OpenAI API client
-openai.api_key = &quot;YOUR_API_KEY&quot;
-openai.api_type = &quot;azure&quot;
-openai.api_version = &quot;2022-06-01-preview&quot;
-openai.api_base = Deployment_url
+# Set the API key and service hostname
+api_key = &quot;YOUR_API_KEY&quot;
+service_hostname = &quot;YOUR_SERVICE_HOSTNAME&quot;
+
+# Create an OpenAI client
+client = OpenAI(api_key=api_key)
+
+# Define a function to send requests to the KServe LLM Inference Service
+def send_request(prompt):
+    # Set the request headers and data
+    headers = {
+        &quot;Content-Type&quot;: &quot;application/json&quot;,
+        &quot;Authorization&quot;: f&quot;Bearer {api_key}&quot;
+    }
+    data = json.dumps({&quot;prompt&quot;: prompt})
+
+    # Send the request to the KServe LLM Inference Service
+    response = client.post(
+        f&quot;https://{service_hostname}/v1/models/llama4/infer&quot;,
+        headers=headers,
+        data=data
+    )
+
+    # Return the response
+    return response.json()
+
+# Test the function
+prompt = &quot;Hello, world!&quot;
+response = send_request(prompt)
+print(response)
 </code></pre>
-<p>Replace <code>YOUR_API_KEY</code> with your actual API key.</p>
-<p>Note that you may need to modify the <code>model_name</code> and <code>model_id</code> in the InferenceService YAML file to match the specific LLaMA 4.1 model you want to use. Additionally, make sure to update the <code>HF_TOKEN</code> environment variable with your actual Hugging Face token.</p>
-<p>By following these steps, you should be able to integrate KServe with LLaMA 4.1 and use the OpenAI SDK to interact with the model.- The model name for the above example is llama3.</p>
+<p>Replace <code>YOUR_API_KEY</code> and <code>YOUR_SERVICE_HOSTNAME</code> with your actual API key and service hostname.</p>
+<ol start="5">
+<li><strong>Run the Python script</strong>: Run the Python script using <code>python sample_openai.py</code>. This will send a request to the KServe LLM Inference Service and print the response.</li>
+</ol>
+<p>Note: Make sure you have the necessary dependencies installed, including <code>openai</code> and <code>kubectl</code>. Additionally, ensure that your API key and service hostname are correct.</p>
+<br><br><h2>RAG Context</h2><h3>Local Database Search</h3><ul>
+<li>The model name for the above example is llama3.</li>
+</ul>
 <p>How to integrate with OpenAI SDK</p>
 <p>Install the OpenAI SDK:</p>
 <p>bash pip3 install openai</p>
@@ -113,5 +145,60 @@ memory: 24Gi
 nvidia.com/gpu: &quot;1&quot;
 requests:</p>
 <ul>
-<li>=== &quot;yaml&quot; yaml cat &lt;&lt;EOF | kubectl apply -f - apiVersion: serving.kserve.io/v1beta1 kind: InferenceService metadata: name: huggingface-llama3 spec: predictor: model: modelFormat: name: huggingface args: - --model_name=llama3 - --model_dir=/mnt/models storageUri: hf://meta-llama/meta-llama-3-8b-instruct resources: limits: cpu: &quot;6&quot; memory: 24Gi nvidia.com/gpu: &quot;1&quot; requests: cpu: &quot;6&quot; memory: 24Gi nvidia.com/gpu: &quot;1&quot; env: - name: HF_TOKEN # Option 2 for authenticating with HF_TOKEN valueFrom:<table border="1"><thead><tr><th>title</th><th>url</th><th>content</th><th>score</th><th>raw_content</th></tr></thead><tbody><tr><td>ktransformers/doc/en/llama4.md at main - GitHub</td><td>https://github.com/kvcache-ai/ktransformers/blob/main/doc/en/llama4.md</td><td>We are pleased to announce that KTransformers now provides experimental support for LLaMA 4 models through the powerful balance_serve backend introduced in v0.2.4.This update is available under the dedicated development branch: support-llama4, specifically targeting the newly released Meta LLaMA 4 model architecture. ⚠️ This support is currently not available on the main branch due to</td><td>0.6364215</td><td>None</td></tr><tr><td>KServe | kserve</td><td>https://kserve.github.io/kserve/</td><td>Quick Installation: Install KServe on your local machine. Kubeflow Installation. KServe is an important addon component of Kubeflow, please learn more from the Kubeflow KServe documentation. Check out the following guides for running on AWS or on OpenShift Container Platform.:flight_departure: Create your first InferenceService:bulb: Roadmap</td><td>0.47636098</td><td>None</td></tr><tr><td>Need to upgrade vLLM version to support Llama3.1 #3826 - GitHub</td><td>https://github.com/kserve/kserve/issues/3826</td><td>Seems like vllm-project/vllm introduced breaking changes to OpenAI endpoint implementation in v0.5.3, which makes impossible to simply patch kserve/huggingfaceserver:0.13.1 image with the newer version of vllm package (i.e. &gt;=0.5.3).</td><td>0.24482805</td><td>None</td></tr><tr><td>Documentation | Llama</td><td>https://www.llama.com/docs/get-started/</td><td>This guide provides information and resources to help you set up Llama including how to access the model, hosting, how-to and integration guides.</td><td>0.11501327</td><td>None</td></tr><tr><td>Short guide to hosting your own llama.cpp openAI compatible ... - Reddit</td><td>https://www.reddit.com/r/LocalLLaMA/comments/15ak5k4/short_guide_to_hosting_your_own_llamacpp_openai/</td><td>Hey all, I had a goal today to set-up wizard-2-13b (the llama-2 based one) as my primary assistant for my daily coding tasks. I finished the set-up after some googling. llama.cpp added a server component, this server is compiled when you run make as usual.</td><td>0.07999034</td><td>None</td></tr></tbody></table></li>
+<li>=== &quot;yaml&quot; yaml cat &lt;&lt;EOF | kubectl apply -f - apiVersion: serving.kserve.io/v1beta1 kind: InferenceService metadata: name: huggingface-llama3 spec: predictor: model: modelFormat: name: huggingface args: - --model_name=llama3 - --model_dir=/mnt/models storageUri: hf://meta-llama/meta-llama-3-8b-instruct resources: limits: cpu: &quot;6&quot; memory: 24Gi nvidia.com/gpu: &quot;1&quot; requests: cpu: &quot;6&quot; memory: 24Gi nvidia.com/gpu: &quot;1&quot; env: - name: HF_TOKEN # Option 2 for authenticating with HF_TOKEN valueFrom:</li>
 </ul>
+<h3>Web Search Results</h3><h3>title</h3>
+<p>ktransformers/doc/en/llama4.md at main - GitHub</p>
+<h3>url</h3>
+<p>https://github.com/kvcache-ai/ktransformers/blob/main/doc/en/llama4.md</p>
+<h3>content</h3>
+<p>We are pleased to announce that KTransformers now provides experimental support for LLaMA 4 models through the powerful balance_serve backend introduced in v0.2.4.This update is available under the dedicated development branch: support-llama4, specifically targeting the newly released Meta LLaMA 4 model architecture. ⚠️ This support is currently not available on the main branch due to</p>
+<h3>score</h3>
+<p>0.63615024</p>
+<h3>raw_content</h3>
+<p>None</p>
+<hr />
+<h3>title</h3>
+<p>Introduction - Kubeflow</p>
+<h3>url</h3>
+<p>https://www.kubeflow.org/docs/external-add-ons/kserve/introduction/</p>
+<h3>content</h3>
+<p>KServe is an open-source project that enables serverless inferencing on Kubernetes. KServe provides performant, high abstraction interfaces for common machine learning (ML) frameworks like TensorFlow, XGBoost, scikit-learn, PyTorch, and ONNX to solve production model serving use cases. The following diagram shows the architecture of KServe:</p>
+<h3>score</h3>
+<p>0.40344992</p>
+<h3>raw_content</h3>
+<p>None</p>
+<hr />
+<h3>title</h3>
+<p>Short guide to hosting your own llama.cpp openAI compatible ... - Reddit</p>
+<h3>url</h3>
+<p>https://www.reddit.com/r/LocalLLaMA/comments/15ak5k4/short_guide_to_hosting_your_own_llamacpp_openai/</p>
+<h3>content</h3>
+<p>Subreddit to discuss about Llama, the large language model created by Meta AI. Short guide to hosting your own llama.cpp openAI compatible web-server llama.cpp added a server component, this server is compiled when you run make as usual. Run the server ./server -m models/wizard-2-13b/ggml-model-q4_1.bin There's a bug with the openAI api unfortunately, you need the api_like_OAI.py file from this branch: https://github.com/ggerganov/llama.cpp/pull/2383, this is it as raw txt: https://raw.githubusercontent.com/ggerganov/llama.cpp/d8a8d0e536cfdaca0135f22d43fda80dc5e47cd8/examples/server/api_like_OAI.py. Replace the examples/server/api_like_OAI.py with the downloaded file Run the openai compatibility server, cd examples/server and python api_like_OAI.py You can access llama's built-in web server by going to localhost:8080 (port from ./server) Reddit Reddit Reddit Communities Best of Reddit Topics Reddit, Inc.</p>
+<h3>score</h3>
+<p>0.18732621</p>
+<h3>raw_content</h3>
+<p>None</p>
+<hr />
+<h3>title</h3>
+<p>Documentation | Llama</p>
+<h3>url</h3>
+<p>https://www.llama.com/docs/get-started/</p>
+<h3>content</h3>
+<p>Documentation | Llama OverviewModels Getting the Models Running Llama How-To Guides Integration Guides Community Support Running Llama Running Llama Running Llama ModelsLlama 3.3Llama 3.2Llama 3.1Llama Guard 3Prompt GuardOther models ModelsLlama 3.3Llama 3.2Llama 3.1Llama Guard 3Prompt GuardOther models This guide provides information and resources to help you set up Llama including how to access the model, hosting, how-to and integration guides. Llama 3.3 70B Llama 3.2 Quantized Models Llama 3.3 70B (New) Llama 3.2 Lightweight Llama models with new multimodal capabilities that enable Llama to interpret visual information. The Llama 3.2 lightweight models enable Llama to run on phones, tablets, and edge devices. To discover more about what's possible with the Llama family of models, explore the topics below. Llama Everywhere</p>
+<h3>score</h3>
+<p>0.093620166</p>
+<h3>raw_content</h3>
+<p>None</p>
+<hr />
+<h3>title</h3>
+<p>Running Meta Llama on Windows</p>
+<h3>url</h3>
+<p>https://www.llama.com/docs/llama-everywhere/running-meta-llama-on-windows/</p>
+<h3>content</h3>
+<p>This tutorial is a part of our Build with Meta Llama series, where we demonstrate the capabilities and practical applications of Llama for developers like you, so that you can leverage the benefits that Llama has to offer and incorporate it into your own applications. This tutorial supports the video Running Llama on Windows | Build with Meta Llama, where we learn how to run Llama on Windows</p>
+<h3>score</h3>
+<p>0.049907673</p>
+<h3>raw_content</h3>
+<p>None</p>
+<hr />

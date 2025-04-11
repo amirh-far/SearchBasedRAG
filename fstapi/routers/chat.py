@@ -22,7 +22,9 @@ async def create_completion(completion:Completion):
     web_text = ""
     for result in web_res:
         for key, value in result.items():
-            web_text += f"{key}: {value}\n"
+            web_text += f"### {key}\n {value}\n\n"
+        web_text += "----\n"
+
     html_content += marko.convert(web_text)
 
     with open("html_response.html", "w") as f:
