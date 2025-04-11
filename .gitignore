@@ -207,3 +207,8 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+
+# js
+/.next/
+/out/
