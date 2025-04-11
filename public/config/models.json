@@ -136,6 +136,15 @@
       "toolCallModel": "llama3.3:70b"
     },
     {
+      "id": "llama3.1:70b",
+      "name": "llama3.1:70b",
+      "provider": "Ollama",
+      "providerId": "ollama",
+      "enabled": true,
+      "toolCallType": "manual",
+      "toolCallModel": "llama3.1:70b"
+    },
+    {
       "id": "grok-2-1212",
       "name": "Grok 2",
       "provider": "xAI",

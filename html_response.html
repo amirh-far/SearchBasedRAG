@@ -1,15 +1,117 @@
-<p>KServe (also known as KServe) is an open-source project under the LF AI &amp; Data Foundation that provides a standardized way to serve machine learning models. The main usages of KServe are:</p>
+<p>To integrate KServe with LLaMA 4.1, you'll need to follow these steps:</p>
 <ol>
-<li><strong>Model Serving</strong>: KServe allows you to deploy and manage machine learning models in a scalable and secure manner.</li>
-<li><strong>Inference</strong>: KServe provides a data plane API for inference, which enables you to send requests to your deployed models and receive predictions.</li>
-<li><strong>Model Management</strong>: KServe supports multiple model formats and frameworks, including TensorFlow, PyTorch, Scikit-learn, and more, making it easy to manage and deploy different types of models.</li>
-<li><strong>Customization</strong>: KServe allows you to customize pre-processing, prediction, and post-processing handlers for your models, giving you flexibility in how you want to serve your models.</li>
-<li><strong>Integration with Other Tools</strong>: KServe is designed to work seamlessly with other tools and frameworks in the machine learning ecosystem, such as ModelMesh, making it easy to integrate into your existing workflows.</li>
+<li><strong>Deploy a KServe LLM Inference Service</strong>: Use the example provided in the documentation to deploy a KServe LLM Inference Service for LLaMA 3. You can modify the <code>model_name</code> and <code>model_id</code> to use LLaMA 4.1 instead.</li>
 </ol>
-<p>Some of the key features of KServe include:</p>
+<pre><code class="language-yaml">apiVersion: serving.kserve.io/v1beta1
+kind: InferenceService
+metadata:
+  name: huggingface-llama4
+spec:
+  predictor:
+    model:
+      modelFormat:
+        name: huggingface
+      args:
+        - --model_name=llama4
+        - --model_id=meta-llama/meta-llama-4-8b-instruct
+        - --backend=huggingface
+      env:
+        - name: HF_TOKEN
+          valueFrom:
+            secretKeyRef:
+              name: hf-secret
+              key: HF_TOKEN
+</code></pre>
+<ol start="2">
+<li><strong>Get the SERVICE_HOSTNAME</strong>: Run the following command to get the <code>SERVICE_HOSTNAME</code>:</li>
+</ol>
+<pre><code class="language-bash">SERVICE_HOSTNAME=$(kubectl get inferenceservice huggingface-llama4 -o jsonpath=&#x27;{.status.url}&#x27; | cut -d &quot;/&quot; -f 3)
+</code></pre>
+<ol start="3">
+<li><strong>Install the OpenAI SDK</strong>: Install the OpenAI SDK using pip:</li>
+</ol>
+<pre><code class="language-bash">pip3 install openai
+</code></pre>
+<ol start="4">
+<li><strong>Create a Python script to interact with the KServe LLM Inference Service</strong>: Create a Python script (e.g., <code>sample_openai.py</code>) to interact with the KServe LLM Inference Service using the OpenAI SDK.</li>
+</ol>
+<pre><code class="language-python">from openai import OpenAI
+
+Deployment_url = f&quot;http://{SERVICE_HOSTNAME}&quot;
+# Initialize the OpenAI API client
+openai.api_key = &quot;YOUR_API_KEY&quot;
+openai.api_type = &quot;azure&quot;
+openai.api_version = &quot;2022-06-01-preview&quot;
+openai.api_base = Deployment_url
+</code></pre>
+<p>Replace <code>YOUR_API_KEY</code> with your actual API key.</p>
+<p>Note that you may need to modify the <code>model_name</code> and <code>model_id</code> in the InferenceService YAML file to match the specific LLaMA 4.1 model you want to use. Additionally, make sure to update the <code>HF_TOKEN</code> environment variable with your actual Hugging Face token.</p>
+<p>By following these steps, you should be able to integrate KServe with LLaMA 4.1 and use the OpenAI SDK to interact with the model.- The model name for the above example is llama3.</p>
+<p>How to integrate with OpenAI SDK</p>
+<p>Install the OpenAI SDK:</p>
+<p>bash pip3 install openai</p>
+<p>Create a Python script to interact with the KServe LLM Inference Service and save it as sample_openai.py:</p>
+<p>=== &quot;python&quot; ```python from openai import OpenAI</p>
+<p>Deployment_url = &quot;</p>
+<p>typial chat completion response</p>
 <ul>
-<li><strong>InferenceGraph</strong>: a new feature that allows you to define complex inference workflows</li>
-<li><strong>InferenceService API</strong>: a standardized API for deploying models on KServe and other platforms</li>
-<li><strong>Python Runtime API</strong>: a Python API that implements a standardized model server API following open inference protocol</li>
+<li>Integrate KServe LLM Deployment with LLM SDKs</li>
 </ul>
-<p>Overall, the main usage of KServe is to make it easy to serve machine learning models in a scalable, secure, and customizable way, allowing you to focus on building and deploying your models rather than worrying about the underlying infrastructure.</p>
+<p>This document provides the example of how to integrate KServe LLM Inference Service with the popular LLM SDKs.</p>
+<p>Deploy a KServe LLM Inference Service</p>
+<p>Please follow this example: Text Generation using LLama3 to deploy a KServe LLM Inference Service.</p>
+<p>Get the SERVICE_HOSTNAME by running the following command:</p>
+<p>bash SERVICE_HOSTNAME=$(kubectl get inferenceservice huggingface-llama3 -o jsonpath='{.status.url}' | cut -d &quot;/&quot; -f 3)</p>
+<ul>
+<li>
+<pre><code class="language-yaml"></code></pre>
+</li>
+</ul>
+<p>kubectl apply -f - &lt;&lt;EOF
+apiVersion: serving.kserve.io/v1beta1
+kind: InferenceService
+metadata:
+name: huggingface-llama3
+spec:
+predictor:
+model:
+modelFormat:
+name: huggingface
+args:
+- --model_name=llama3
+- --model_id=meta-llama/meta-llama-3-8b-instruct
+- --backend=huggingface
+env:
+- name: HF_TOKEN
+valueFrom:
+secretKeyRef:
+name: hf-secret
+key: HF_TOKEN</p>
+<ul>
+<li>
+<pre><code class="language-yaml"></code></pre>
+</li>
+</ul>
+<p>kubectl apply -f - &lt;&lt;EOF
+apiVersion: serving.kserve.io/v1beta1
+kind: InferenceService
+metadata:
+name: huggingface-llama3
+spec:
+predictor:
+model:
+modelFormat:
+name: huggingface
+args:
+- --model_name=llama3
+- --model_id=meta-llama/meta-llama-3-8b-instruct
+storageUri: hf://meta-llama/meta-llama-3-8b-instruct
+resources:
+limits:
+cpu: &quot;6&quot;
+memory: 24Gi
+nvidia.com/gpu: &quot;1&quot;
+requests:</p>
+<ul>
+<li>=== &quot;yaml&quot; yaml cat &lt;&lt;EOF | kubectl apply -f - apiVersion: serving.kserve.io/v1beta1 kind: InferenceService metadata: name: huggingface-llama3 spec: predictor: model: modelFormat: name: huggingface args: - --model_name=llama3 - --model_dir=/mnt/models storageUri: hf://meta-llama/meta-llama-3-8b-instruct resources: limits: cpu: &quot;6&quot; memory: 24Gi nvidia.com/gpu: &quot;1&quot; requests: cpu: &quot;6&quot; memory: 24Gi nvidia.com/gpu: &quot;1&quot; env: - name: HF_TOKEN # Option 2 for authenticating with HF_TOKEN valueFrom:<table border="1"><thead><tr><th>title</th><th>url</th><th>content</th><th>score</th><th>raw_content</th></tr></thead><tbody><tr><td>ktransformers/doc/en/llama4.md at main - GitHub</td><td>https://github.com/kvcache-ai/ktransformers/blob/main/doc/en/llama4.md</td><td>We are pleased to announce that KTransformers now provides experimental support for LLaMA 4 models through the powerful balance_serve backend introduced in v0.2.4.This update is available under the dedicated development branch: support-llama4, specifically targeting the newly released Meta LLaMA 4 model architecture. ⚠️ This support is currently not available on the main branch due to</td><td>0.6364215</td><td>None</td></tr><tr><td>KServe | kserve</td><td>https://kserve.github.io/kserve/</td><td>Quick Installation: Install KServe on your local machine. Kubeflow Installation. KServe is an important addon component of Kubeflow, please learn more from the Kubeflow KServe documentation. Check out the following guides for running on AWS or on OpenShift Container Platform.:flight_departure: Create your first InferenceService:bulb: Roadmap</td><td>0.47636098</td><td>None</td></tr><tr><td>Need to upgrade vLLM version to support Llama3.1 #3826 - GitHub</td><td>https://github.com/kserve/kserve/issues/3826</td><td>Seems like vllm-project/vllm introduced breaking changes to OpenAI endpoint implementation in v0.5.3, which makes impossible to simply patch kserve/huggingfaceserver:0.13.1 image with the newer version of vllm package (i.e. &gt;=0.5.3).</td><td>0.24482805</td><td>None</td></tr><tr><td>Documentation | Llama</td><td>https://www.llama.com/docs/get-started/</td><td>This guide provides information and resources to help you set up Llama including how to access the model, hosting, how-to and integration guides.</td><td>0.11501327</td><td>None</td></tr><tr><td>Short guide to hosting your own llama.cpp openAI compatible ... - Reddit</td><td>https://www.reddit.com/r/LocalLLaMA/comments/15ak5k4/short_guide_to_hosting_your_own_llamacpp_openai/</td><td>Hey all, I had a goal today to set-up wizard-2-13b (the llama-2 based one) as my primary assistant for my daily coding tasks. I finished the set-up after some googling. llama.cpp added a server component, this server is compiled when you run make as usual.</td><td>0.07999034</td><td>None</td></tr></tbody></table></li>
+</ul>

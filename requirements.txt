@@ -1,5 +1,5 @@
 pandas
-numpy
+numpy==1.26.4
 openai
 jupyter
 ipykernel
@@ -9,8 +9,12 @@ langchain-community
 unstructured
 Markdown
 tqdm
-faiss-gpu
+faiss-cpu
+# faiss-gpu-cu12[fix-cuda]
 ollama
 fastapi
 uvicorn
 marko
+
+tavily-python
+json2html
