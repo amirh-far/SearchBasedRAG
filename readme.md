@@ -1,138 +1,110 @@
 <p><img src="./imgs/readme_main.webp"></p>
 
 # SearchBasedRAG
-This repository hosts a cutting-edge **Retrieval-Augmented Generation (RAG)** coding agent that integrates advanced tools to streamline coding workflows. It combines state-of-the-art search and generation capabilities with:
-- **Morphic**: Generative search engine for intuitive data retrieval.
-- **Ollama**: Local LLM inference for secure and privacy-preserving AI.
-- **Open WebUI**: A self-hosted platform for seamless user interaction.
-- **Faiss**: High-performance vector similarity search for document retrieval.
-- **BAAI/bge-large-en-v1.5**: State-of-the-art embedding model optimized for dense retrieval tasks.
-- **Nginx**: Reverse proxy server for routing and scalability.
 
-## **Features**
-- 🔍 **Search-Based RAG Pipeline**: Efficient retrieval of relevant information using Faiss and Morphic.
-- 🤖 **LLM Integration**: Local inference with Ollama for generating context-aware responses.
-- 🌐 **Web UI**: User-friendly interface powered by Open WebUI.
-- 🚀 **Scalability**: Handles large datasets with GPU acceleration via Faiss and BAAI embeddings.
+This repository hosts a cutting-edge Retrieval-Augmented Generation (RAG) coding agent that integrates advanced tools to streamline coding workflows. It combines state-of-the-art search and generation capabilities with:
+
+- **Morphic**: Generative search engine for intuitive data retrieval.  
+- **Ollama**: Local LLM inference for secure and privacy-preserving AI.  
+- **Open WebUI**: A self-hosted platform for seamless user interaction.  
+- **Faiss**: High-performance vector similarity search for document retrieval.  
+- **BAAI/bge-large-en-v1.5**: State-of-the-art embedding model optimized for dense retrieval tasks.  
+- **Nginx**: Reverse proxy server for routing and scalability.  
+
+---
+
+## Features
+
+- 🔍 **Search-Based RAG Pipeline**: Efficient retrieval of relevant information using Faiss and Morphic.  
+- 🤖 **LLM Integration**: Local inference with Ollama for generating context-aware responses.  
+- 🌐 **Web UI**: User-friendly interface powered by Open WebUI.  
+- 🚀 **Scalability**: Handles large datasets with GPU acceleration via Faiss and BAAI embeddings.  
 - 🔧 **Reverse Proxy Setup**: Nginx integration for routing and API endpoint customization.
 
-## **Table of Contents**
-1. [About the Project](#about-the-project)
-2. [Features](#features)
-3. [Installation](#installation)
-4. [Usage](#usage)
-5. [Technologies Used](#technologies-used)
-6. [Contributing](#contributing)
-7. [License](#license)
+---
 
-<!-- 
-## **Installation**
+## Table of Contents
 
-### Prerequisites
-Ensure you have the following installed:
-- Python 3.10 or higher
-- Docker (for Open WebUI and Ollama)
-- NVIDIA GPU drivers (for Faiss GPU acceleration)
-- Nginx (for reverse proxy setup)
+- [About the Project](#about-the-project)  
+- [Features](#features)  
+- [Installation](#installation)  
+- [Usage](#usage)  
+- [Technologies Used](#technologies-used)  
+- [Contributing](#contributing)  
+- [License](#license)  
 
-### Steps
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/username/repo.git
-   cd repo
-   ```
-2. Install dependencies:
-   ```bash
-   pip install -r requirements.txt
-   ```
-3. Set up Open WebUI and Ollama:
-   ```bash
-   docker run -d -p 8080:8080 openweb-ui
-   ollama serve --model llama3.3:70b
-   ```
-4. Install Nginx:
-   ```bash
-   sudo apt update
-   sudo apt install nginx
-   ```
-5. Configure Nginx (optional):
-   Edit `/etc/nginx/sites-available/default` to redirect specific endpoints, e.g., `/api/completions` to a custom server.
+---
 
-6. Initialize Faiss index with BAAI/bge-large-en-v1.5 embeddings:
-   ```bash
-   python scripts/init_faiss.py --model BAAI/bge-large-en-v1.5
-   ```
+## About the Project
 
+**SearchBasedRAG** is designed to enhance developer productivity through intelligent search and code generation. By integrating fast vector retrieval (via Faiss) with rich language understanding (via Ollama and BAAI embeddings), the system enables rapid and relevant access to technical documentation, code samples, and online resources—all in a unified conversational workflow.
 
-## **Usage**
+The architecture combines local and web-based knowledge retrieval to ensure both contextual relevance and up-to-date information sourcing. This hybrid approach makes it suitable for both secure enterprise environments and open-source development.
 
-### Running the System
-Start the RAG agent:
-```bash
-python main.py
+---
+
+## Installation
+
+*(To be completed)*
+
+---
+
+## Usage
+
+To use the pipeline, simply call the `pipeline(user_query)` function with a natural language query:
+
+```python
+response, local_context, web_results = pipeline("How do I deploy a model with KServe?")
 ```
 
-### Example Query Workflow
-1. Input a query via Open WebUI (e.g., *"How to deploy KServe on Kubernetes?"*).
-2. The system retrieves relevant documentation using Faiss and BAAI embeddings.
-3. Context-aware responses are generated by Ollama's LLMs.
+The system will:
+1. Rephrase the query for optimal embedding and search.
+2. Retrieve relevant documentation chunks using Faiss.
+3. Fetch additional results from the web via Tavily.
+4. Generate a context-rich, final response using an LLM hosted locally via Ollama.
 
+### Components:
+- **`faiss_search(query)`**: Retrieves relevant passages from local docs.
+- **`query_llama_rag(user_query, system_prompt, rag_context)`**: Interacts with LLM to generate responses.
+- **`pipeline(user_query)`**: Orchestrates local and web search with RAG-style inference.
 
+---
 
-## **Technologies Used**
-- **Morphic**: Generative search engine for retrieving relevant documents.
-- **Ollama**: Local LLM inference engine for secure AI processing.
-- **Open WebUI**: Self-hosted interface for user interaction.
-- **Faiss**: Vector similarity search library for efficient retrieval.
-- **BAAI/bge-large-en-v1.5**: Dense embedding model optimized for semantic search tasks.
-- **Nginx**: Reverse proxy server for routing and API endpoint customization.
+## Technologies Used
 
+- **Python**: Primary language for implementation.
+- **Pandas / NumPy**: Data handling and numerical operations.
+- **Faiss**: Vector similarity search for fast retrieval.
+- **FlagEmbedding**: Embedding model from BAAI with instruction tuning.
+- **Ollama**: Local LLM inference framework.
+- **Tavily API**: Web search integration.
+- **Langchain**: Text chunking and splitting for optimal context.
+- **JSON / OpenAI Format**: For context-rich input/output handling.
+- **Nginx**: Optional reverse proxy for deployment.
 
+---
 
-## **Contributing**
+## Contributing
 
-We welcome contributions from the community! To get started:
-1. Fork the repository.
-2. Create a new branch (`feature/your-feature-name`).
-3. Commit your changes (`git commit -m "Add your feature"`).
-4. Push to your branch (`git push origin feature/your-feature-name`).
-5. Open a pull request.
+Contributions are welcome! If you'd like to:
+- Fix bugs
+- Suggest improvements
+- Add new features
+- Improve documentation
 
+Feel free to open a pull request or submit an issue. Please ensure your changes follow the existing style and include relevant test coverage where necessary.
 
+---
 
-## **License**
+## License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+This project is licensed under the **MIT License**. See the `LICENSE` file for more details.
 
+---
 
+> Still under development — stay tuned for more features and integrations 🚧
 
-## Example Nginx Configuration
-
-To redirect `/api/completions` requests to a custom server:
-
-```nginx
-server {
-    listen 11434;
-    server_name 0.0.0.0;
-
-    location /api/completions {
-        proxy_pass http://127.0.0.1:5000;  # Redirect to your Python server
-        proxy_set_header Host $host;
-        proxy_set_header X-Real-IP $remote_addr;
-        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-        proxy_set_header X-Forwarded-Proto $scheme;
-    }
-
-    location / {
-        proxy_pass http://127.0.0.1:11434;  # Forward all other requests to Ollama API
-        proxy_set_header Host $host;
-        proxy_set_header X-Real-IP $remote_addr;
-        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-        proxy_set_header X-Forwarded-Proto $scheme;
-    }
-}
-```
--->
+Let me know if you’d like the README formatted in Markdown or saved to a file.
   
 <br>
 <br>
