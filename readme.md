@@ -11,8 +11,6 @@ This repository hosts a cutting-edge Retrieval-Augmented Generation (RAG) coding
 - **BAAI/bge-large-en-v1.5**: State-of-the-art embedding model optimized for dense retrieval tasks.  
 - **Nginx**: Reverse proxy server for routing and scalability.  
 
----
-
 ## Features
 
 - 🔍 **Search-Based RAG Pipeline**: Efficient retrieval of relevant information using Faiss and Morphic.  
@@ -20,8 +18,6 @@ This repository hosts a cutting-edge Retrieval-Augmented Generation (RAG) coding
 - 🌐 **Web UI**: User-friendly interface powered by Open WebUI.  
 - 🚀 **Scalability**: Handles large datasets with GPU acceleration via Faiss and BAAI embeddings.  
 - 🔧 **Reverse Proxy Setup**: Nginx integration for routing and API endpoint customization.
-
----
 
 ## Table of Contents
 
@@ -33,21 +29,15 @@ This repository hosts a cutting-edge Retrieval-Augmented Generation (RAG) coding
 - [Contributing](#contributing)  
 - [License](#license)  
 
----
-
 ## About the Project
 
 **SearchBasedRAG** is designed to enhance developer productivity through intelligent search and code generation. By integrating fast vector retrieval (via Faiss) with rich language understanding (via Ollama and BAAI embeddings), the system enables rapid and relevant access to technical documentation, code samples, and online resources—all in a unified conversational workflow.
 
 The architecture combines local and web-based knowledge retrieval to ensure both contextual relevance and up-to-date information sourcing. This hybrid approach makes it suitable for both secure enterprise environments and open-source development.
 
----
-
 ## Installation
 
 *(To be completed)*
-
----
 
 ## Usage
 
@@ -68,8 +58,6 @@ The system will:
 - **`query_llama_rag(user_query, system_prompt, rag_context)`**: Interacts with LLM to generate responses.
 - **`pipeline(user_query)`**: Orchestrates local and web search with RAG-style inference.
 
----
-
 ## Technologies Used
 
 - **Python**: Primary language for implementation.
@@ -82,8 +70,6 @@ The system will:
 - **JSON / OpenAI Format**: For context-rich input/output handling.
 - **Nginx**: Optional reverse proxy for deployment.
 
----
-
 ## Contributing
 
 Contributions are welcome! If you'd like to:
@@ -94,13 +80,9 @@ Contributions are welcome! If you'd like to:
 
 Feel free to open a pull request or submit an issue. Please ensure your changes follow the existing style and include relevant test coverage where necessary.
 
----
-
 ## License
 
 This project is licensed under the **MIT License**. See the `LICENSE` file for more details.
-
----
 
 > Still under development — stay tuned for more features and integrations 🚧
 
