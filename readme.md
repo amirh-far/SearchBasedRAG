@@ -1,6 +1,6 @@
 <p><img src="./imgs/readme_main.webp"></p>
 
-# **State-of-the-Art Search-Based RAG Coding Agent**  
+# SearchBasedRAG
 This repository hosts a cutting-edge **Retrieval-Augmented Generation (RAG)** coding agent that integrates advanced tools to streamline coding workflows. It combines state-of-the-art search and generation capabilities with:
 - **Morphic**: Generative search engine for intuitive data retrieval.
 - **Ollama**: Local LLM inference for secure and privacy-preserving AI.
