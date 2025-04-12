@@ -87,8 +87,3 @@ This project is licensed under the **MIT License**. See the `LICENSE` file for m
 > Still under development — stay tuned for more features and integrations 🚧
 
 Let me know if you’d like the README formatted in Markdown or saved to a file.
-  
-<br>
-<br>
-<br>
-Still under development stay tuned :)
